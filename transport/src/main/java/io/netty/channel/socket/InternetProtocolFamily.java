@@ -38,4 +38,17 @@ public enum InternetProtocolFamily {
     public Class<? extends InetAddress> addressType() {
         return addressType;
     }
+
+    /**
+     * Returns the {@link InternetProtocolFamily} for the given {@link InetAddress}.
+     */
+    public static InternetProtocolFamily familyOf(InetAddress address) {
+        if (address instanceof Inet4Address) {
+            return IPv4;
+        }
+        if (address instanceof Inet6Address) {
+            return IPv6;
+        }
+        throw new IllegalArgumentException("address " + address + " not supported");
+    }
 }
